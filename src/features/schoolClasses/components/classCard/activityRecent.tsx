@@ -1,11 +1,17 @@
 import { Clock4 } from "lucide-react";
-import type { Activity } from "../../activities/types/activity.types";
+import type { Activity } from "../../../activities/types/activity.types";
 
 type ActivityRecentProps = {
-	recentActivity: Activity | null;
+	schoolActivities: Activity[] | null;
 };
 
-export default function ActivityRecent({ recentActivity }: ActivityRecentProps) {
+export default function ActivityRecent({ schoolActivities }: ActivityRecentProps) {
+
+	const recentActivity =
+		schoolActivities && schoolActivities.length > 0
+			? schoolActivities[schoolActivities.length - 1]
+			: null;
+
 	return (
 		<div className="mt-4">
 			<p className="text-gray-500 text-md flex items-center gap-2">

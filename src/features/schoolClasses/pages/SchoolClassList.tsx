@@ -1,6 +1,6 @@
-import Welcome from "../components/welcome";
-import SwiftAction from "../components/swiftAction";
-import MyClasses from "../components/myClasses";
+import MyClasses from "../components/listClasses/myClasses";
+import SwiftAction from "../components/listClasses/swiftAction";
+import Welcome from "../components/listClasses/welcome";
 
 export default function SchoolClassList() {
 

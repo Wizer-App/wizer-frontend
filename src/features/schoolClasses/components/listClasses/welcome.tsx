@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { davo } from "../userTest";
+import { davo } from "../../userTest";
 
 export default function Welcome() {
 	const [time, setTime] = useState(new Date());

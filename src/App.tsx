@@ -3,6 +3,7 @@ import Header from "./features/schoolClasses/components/header";
 import SchoolClassList from "./features/schoolClasses/pages/SchoolClassList";
 import Activities from "./features/activities/pages/Activities";
 import Teams from "./features/teams/pages/Teams";
+import SchoolClassDetail from "./features/schoolClasses/pages/SchoolClassDetail";
 
 function App() {
 	return (
@@ -13,6 +14,8 @@ function App() {
 				<Route path="/schoolclasses" element={<SchoolClassList />} />
 				<Route path="/teams" element={<Teams />} />
 				<Route path="/activities" element={<Activities />} />
+				<Route path="/schoolclasses/:id" element={<SchoolClassDetail />} />
+
 			</Routes>
 		</Router>
 	);
