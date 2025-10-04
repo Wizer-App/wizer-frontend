@@ -1,6 +1,10 @@
+import Header from "../../schoolClasses/components/header";
 
 export default function Activities() {
 	return (
-		<div></div>
+		<div>
+			<Header />
+
+		</div>
 	);
 }

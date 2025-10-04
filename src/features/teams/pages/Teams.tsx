@@ -1,6 +1,9 @@
+import Header from "../../schoolClasses/components/header";
 
 export default function Teams() {
 	return (
-		<div></div>
+		<div>
+			<Header />
+		</div>
 	);
 }

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { SchoolClass } from "../types/schoolClass.types";
 import type { CreateSchoolClassDto } from "../dtos/schoolClass.dto";
 import { getAllSchoolClassesByUserId, addSchoolClass, deleteSchoolClass } from "../services/schoolClass.service";
+import Header from "../components/header";
 
 export default function SchoolClassList() {
 	const [classes, setClasses] = useState<SchoolClass[]>([]);
@@ -27,6 +28,7 @@ export default function SchoolClassList() {
 
 	return (
 		<div>
+			<Header />
 			<h2>Clases</h2>
 			<button onClick={handleAdd}>Agregar clase</button>
 			<ul>
