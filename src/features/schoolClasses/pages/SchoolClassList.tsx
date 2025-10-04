@@ -1,41 +1,25 @@
 import { useEffect, useState } from "react";
 import type { SchoolClass } from "../types/schoolClass.types";
-import type { CreateSchoolClassDto } from "../dtos/schoolClass.dto";
-import { getAllSchoolClassesByUserId, addSchoolClass, deleteSchoolClass } from "../services/schoolClass.service";
-import Header from "../components/header";
+import { getAllSchoolClassesByUserId, } from "../services/schoolClass.service";
+import Welcome from "../components/welcome";
+import { davo } from "../userTest";
+import SwiftAction from "../components/swiftAction";
 
 export default function SchoolClassList() {
 	const [classes, setClasses] = useState<SchoolClass[]>([]);
 
 	useEffect(() => {
-		getAllSchoolClassesByUserId(2).then(setClasses);
+		getAllSchoolClassesByUserId(davo.id).then(setClasses);
 	}, []);
 
-	const handleAdd = async () => {
-		const newClass: CreateSchoolClassDto = {
-			name: "Nueva clase",
-			description: "Clase prueba",
-			teacher: { id: 2 },
-		};
-		const result = await addSchoolClass(newClass);
-		setClasses([...classes, result]);
-	};
-
-	const handleDelete = async (id: number) => {
-		await deleteSchoolClass(id);
-		setClasses(classes.filter(c => c.id !== id));
-	};
-
 	return (
-		<div>
-			<Header />
-			<h2>Clases</h2>
-			<button onClick={handleAdd}>Agregar clase</button>
+		<div className="bg-gray-50 min-h-screen px-4 sm:px-20 lg:px-40 xl:px-80">
+			<Welcome />
+			<SwiftAction />
 			<ul>
 				{classes.map(c => (
 					<li key={c.id}>
 						{c.name} - {c.description}
-						<button onClick={() => handleDelete(c.id)}>Eliminar</button>
 					</li>
 				))}
 			</ul>

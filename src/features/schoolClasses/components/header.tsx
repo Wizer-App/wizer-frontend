@@ -9,9 +9,9 @@ export default function Header() {
 	};
 
 	return (
-		<header className="bg-white border-b px-20 py-4">
+		<header className="bg-white px-20 py-4 ">
 			<div className="flex items-center justify-between">
-				<div className="flex items-center gap-2">
+				<div className="flex items-center gap-2 ">
 					<Link to="/">
 						<h1 className="text-xl font-semibold text-blue-500 flex items-center gap-2"><WandSparkles size={18} /> W I Z E R</h1>
 					</Link>
