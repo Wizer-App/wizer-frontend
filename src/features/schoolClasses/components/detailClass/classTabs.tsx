@@ -2,6 +2,7 @@ import { Info, Users } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import InfoClass from "./infoClass";
 import type { SchoolClass } from "../../types/schoolClass.types";
+import { davo } from "../../userTest";
 
 type TabButtonProps = {
 	label: string;
@@ -44,7 +45,7 @@ export default function ClassTabs({ schoolClass }: ClassTabsProps) {
 			</div>
 
 			<div className="p-4 bg-white shadow rounded">
-				{activeTab === "info" && <InfoClass schoolClass={schoolClass} />}
+				{activeTab === "info" && <InfoClass schoolClass={schoolClass} currentUserId={davo.id} />}
 				{activeTab === "teams" && <p>Lista de equipos de la clase</p>}
 				{activeTab === "activities" && <p>Lista de actividades de la clase</p>}
 				{activeTab === "schedule" && <p>Horario de la clase</p>}

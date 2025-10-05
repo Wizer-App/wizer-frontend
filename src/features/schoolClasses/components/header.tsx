@@ -26,7 +26,7 @@ export default function Header() {
 	const isActive = (path: string) => location.pathname === path;
 
 	return (
-		<header className="bg-white px-20 py-4">
+		<header className="fixed top-0 left-0 w-full z-50 bg-white px-20 py-4">
 			<div className="flex items-center justify-between">
 				<div className="flex items-center gap-2">
 					<Link to="/">
