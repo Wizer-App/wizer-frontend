@@ -3,11 +3,12 @@ import { authService } from "../services/authService";
 import type { User } from "../features/users/types/user.types";
 import type { AuthResponse } from "../features/auth/types/auth.types";
 import type { LoginData } from "../features/auth/types/authRequest.types";
+import { useAuthContext } from "../context/authContext";
 
 export function useAuth() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [user, setUser] = useState<User | null>(authService.getCurrentUser());
+  const { login: contextLogin, logout: contextLogout } = useAuthContext();
 
   const login = async (credentials: LoginData): Promise<AuthResponse> => {
     setLoading(true);
@@ -22,15 +23,15 @@ export function useAuth() {
       if (response.success && response.accessToken) {
         localStorage.setItem("authToken", response.accessToken);
 
-        if (response.userId && response.userName) {
+        if (response.userId && response.username) {
           const userData: User = {
             id: parseInt(response.userId),
-            userName: response.userName,
+            userName: response.username,
             email: "",
             createdAt: new Date(),
           };
           localStorage.setItem("user", JSON.stringify(userData));
-          setUser(userData);
+          contextLogin(userData);
         }
       }
       setLoading(false);
@@ -43,9 +44,14 @@ export function useAuth() {
     }
   };
 
+  const logout = () => {
+    authService.logout();
+    contextLogout();
+  };
+
   return {
-    user,
     login,
+    logout,
     loading,
     error,
     isAuthenticated: authService.isAuthenticated,
