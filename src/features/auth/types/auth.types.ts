@@ -2,7 +2,7 @@ import type { User } from "../../users/types/user.types";
 
 export interface AuthResponse {
   userId: string;
-  userName?: string;
+  username?: string;
   accessToken?: string;
   message?: string;
   success: boolean;
