@@ -5,11 +5,14 @@ export interface AuthContextType {
   user: User | null;
   login: (userData: User) => void;
   logout: () => void;
-  isAuthenticated: boolean;
+  getToken: () => string | null;
+  isAuthenticated: () => boolean;
   isLoading: boolean;
 }
 
-export const AuthContext = createContext<AuthContextType | undefined>(undefined);
+export const AuthContext = createContext<AuthContextType | undefined>(
+  undefined
+);
 
 export function useAuthContext() {
   const context = useContext(AuthContext);

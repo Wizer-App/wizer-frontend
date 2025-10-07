@@ -7,6 +7,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Lo que va a poder tener acceso desde el contexto
+
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
     if (savedUser) {
@@ -20,6 +22,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.setItem("user", JSON.stringify(userData));
   };
 
+  const getToken = (): string | null => {
+    return localStorage.getItem("authToken");
+  };
+
+  const isAuthenticated = (): boolean => {
+    return !!getToken();
+  };
+
   const logout = () => {
     setUser(null);
     localStorage.removeItem("user");
@@ -30,8 +40,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     user,
     login,
     logout,
-    isAuthenticated: !!user,
+    isAuthenticated,
     isLoading,
+    getToken,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
