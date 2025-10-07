@@ -1,5 +1,8 @@
 import { BookOpen, School, UserRound, Users, WandSparkles } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { useAuthContext } from "../../../context/authContext";
+//import {useAuth} from "../../../hooks/useAuthHub"
+
 
 type NavLinkItemProps = {
 	to: string;
@@ -24,6 +27,11 @@ const NavLinkItem = ({ to, icon, label, isActive }: NavLinkItemProps) => {
 export default function Header() {
 	const location = useLocation();
 	const isActive = (path: string) => location.pathname === path;
+	const {user, isAuthenticated} = useAuthContext();
+	//const {logout} = useAuth();
+	console.log("User en el header: ", user);
+	console.log("Esta auten: ", isAuthenticated());
+	//logout();
 
 	return (
 		<header className="fixed top-0 left-0 w-full z-50 bg-white px-20 py-4">

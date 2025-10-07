@@ -1,5 +1,5 @@
 export interface User {
-  id: number;
+  id?: number;
   userName: string;
   email?: string;
   name?: string;
@@ -8,4 +8,8 @@ export interface User {
   photo?: string;
   typeUser?: string;
   infoUserId?: number;
+  authId?: string;
+  accessToken?: string;
+  authMessage?: string;
+  success?: boolean;
 }

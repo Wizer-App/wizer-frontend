@@ -4,6 +4,7 @@ import type { User } from "../features/users/types/user.types";
 import type { AuthResponse } from "../features/auth/types/auth.types";
 import type { LoginData } from "../features/auth/types/authRequest.types";
 import { useAuthContext } from "../context/authContext";
+import { userService } from "../services/userService";
 
 export function useAuth() {
   const [loading, setLoading] = useState(false);
@@ -24,11 +25,17 @@ export function useAuth() {
         localStorage.setItem("authToken", response.accessToken);
 
         if (response.userId && response.username) {
+          const allUser = await userService.getUserByUsername(response.username);
           const userData: User = {
-            id: parseInt(response.userId),
+            id: allUser.id,
+            name: allUser.name,
+            lastName: allUser.lastName,
+            email: allUser.email,
+            authId: response.userId,
             userName: response.username,
-            email: "",
-            createdAt: new Date(),
+            success: true,
+            accessToken: response.accessToken,
+            authMessage: "Exito Login"
           };
           localStorage.setItem("user", JSON.stringify(userData));
           contextLogin(userData);
@@ -45,7 +52,6 @@ export function useAuth() {
   };
 
   const logout = () => {
-    authService.logout();
     contextLogout();
   };
 
@@ -53,8 +59,6 @@ export function useAuth() {
     login,
     logout,
     loading,
-    error,
-    isAuthenticated: authService.isAuthenticated,
-    getCurrentUser: authService.getCurrentUser,
+    error
   };
 }
