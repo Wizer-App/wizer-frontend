@@ -1,10 +1,10 @@
 import { useEffect, useState, type ReactNode } from "react";
-import type { User } from "../features/users/types/user.types";
 import type { AuthContextType } from "./authContext";
 import { AuthContext } from "./authContext";
+import type { UserAuth } from "../features/auth/types/userAuth.type";
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<UserAuth | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   // Lo que va a poder tener acceso desde el contexto
@@ -17,13 +17,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(false);
   }, []);
 
-  const login = (userData: User) => {
+  const login = (userData: UserAuth) => {
     setUser(userData);
     localStorage.setItem("user", JSON.stringify(userData));
   };
 
   const getToken = (): string | null => {
-    return localStorage.getItem("authToken");
+    return localStorage.getItem("accessToken");
   };
 
   const isAuthenticated = (): boolean => {
@@ -33,7 +33,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = () => {
     setUser(null);
     localStorage.removeItem("user");
-    localStorage.removeItem("authToken");
+    localStorage.removeItem("accessToken");
   };
 
   const value: AuthContextType = {

@@ -1,3 +1,4 @@
+// No ha sido usada
 export interface User {
   id?: number;
   userName: string;
