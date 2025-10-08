@@ -1,7 +1,8 @@
 import { BookOpen, School, UserRound, Users, WandSparkles } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuthContext } from "../../../context/authContext";
-//import {useAuth} from "../../../hooks/useAuthHub"
+import {useAuth} from "../../../hooks/useAuthHub";
+import { useNavigate } from 'react-router-dom';
 
 
 type NavLinkItemProps = {
@@ -28,10 +29,15 @@ export default function Header() {
 	const location = useLocation();
 	const isActive = (path: string) => location.pathname === path;
 	const {user, isAuthenticated} = useAuthContext();
-	//const {logout} = useAuth();
+	const {logout} = useAuth();
 	console.log("User en el header: ", user);
 	console.log("Esta auten: ", isAuthenticated());
-	//logout();
+	const navigate = useNavigate();
+	const handleLogout = () => {
+		logout();
+		navigate('/login');
+		console.log("Se cerro sesión");
+	}
 
 	return (
 		<header className="fixed top-0 left-0 w-full z-50 bg-white px-20 py-4">
@@ -48,6 +54,7 @@ export default function Header() {
 					<NavLinkItem to="/schoolclasses" icon={<School size={20} />} label="Mis clases" isActive={isActive("/schoolclasses")} />
 					<NavLinkItem to="/teams" icon={<Users size={20} />} label="Equipos" isActive={isActive("/teams")} />
 					<NavLinkItem to="/activities" icon={<BookOpen size={20} />} label="Actividades" isActive={isActive("/activities")} />
+					<button type="button" className="bg-red-500 text-white p-2 hover:bg-red-400" onClick={handleLogout}>Logout</button>
 				</nav>
 
 				<div className="flex items-center gap-4">

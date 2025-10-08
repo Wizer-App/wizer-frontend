@@ -1,9 +1,9 @@
 import { createContext, useContext } from "react";
-import type { User } from "../features/users/types/user.types";
+import type { UserAuth } from "../features/auth/types/userAuth.type";
 
 export interface AuthContextType {
-  user: User | null;
-  login: (userData: User) => void;
+  user: UserAuth | null;
+  login: (userData: UserAuth) => void;
   logout: () => void;
   getToken: () => string | null;
   isAuthenticated: () => boolean;
